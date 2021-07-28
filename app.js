@@ -1,7 +1,7 @@
 const http = require("http"); // Require the http module so we can use it in our app
 
 const server = http.createServer(function(request, response){
-    if(request.url == "/ChangeKey/"){ // Determine if the request is on our API url
+    if(request.url == "/SetKey/"){ // Determine if the request is on our API url
         console.log(request.url);
         response.write("test");
         response.end();

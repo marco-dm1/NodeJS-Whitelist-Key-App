@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>NodeJS Whitelist Key App</title>
+        
     </head>
     <body style="text-align: center;">
         <form>
@@ -8,7 +9,7 @@
             <input id="accountName" name="accountName"></input>
             <label for="whitelistKey">Whitelist Key:</label>
             <input id="whitelistKey" name="whitelistKey"></input>
-            <button>Set Whitelist Key to Account Name</button>
+            <button type="button" onclick="formSubmit()">Set Whitelist Key to Account Name</button>
         </form>
 
         <div id="available">
@@ -18,5 +19,6 @@
             <h3>Already set whitelist keys:</h3>
 
         </div>
+        <script src="index.js"></script>
     </body>
 </html>
