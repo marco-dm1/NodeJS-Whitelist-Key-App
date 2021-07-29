@@ -4,7 +4,7 @@ const url = require("./urlFunctions.js");
 url.parse("?first=hello&second=test")
 
 const server = http.createServer(function(request, response){
-    if(request.url.split("?")[0] == "/SetKey"){ // Determine if the request is on our API url
+    if(request.url.split('?')[0] == "/SetKey"){ // Determine if the request is on our API url
         const queryObject = url.parse(request.url).query;
         console.log("setkey");
         response.write("test");

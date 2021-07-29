@@ -13,7 +13,7 @@ function parseQueries(url){
     let queries = [];
     let lastQueryPosition = -1;
     for(let i = 0; i < url.length; i++){
-        if(url[i] == "?" || url[i] == "&"){
+        if(url[i] == '?' || url[i] == '&'){
             if(lastQueryPosition != -1){
                 queries.push(url.substring(lastQueryPosition + 1, i));
             }
