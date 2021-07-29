@@ -24,8 +24,7 @@ function parseQueries(url){
             }
         }
     }
-    parseValues(queries);
-    return queries;
+    return parseValues(queries);
 }
 
 module.exports.parse = parseQueries;
