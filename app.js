@@ -1,8 +1,12 @@
 const http = require("http"); // Require the http module so we can use it in our app
+const url = require("./urlFunctions.js");
+
+url.parse("?first=hello&second=test")
 
 const server = http.createServer(function(request, response){
-    if(request.url == "/SetKey/"){ // Determine if the request is on our API url
-        console.log(request.url);
+    if(request.url.split("?")[0] == "/SetKey"){ // Determine if the request is on our API url
+        const queryObject = url.parse(request.url).query;
+        console.log("setkey");
         response.write("test");
         response.end();
     }else{ // Otherwise send a generic response back saying that the API doesn't exist
