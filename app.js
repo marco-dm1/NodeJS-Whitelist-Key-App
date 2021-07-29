@@ -7,6 +7,8 @@ const server = http.createServer(function(request, response){
     if(request.url.split('?')[0] == "/SetKey"){ // Determine if the request is on our API url
         const queryObject = url.parse(request.url).query;
         console.log("setkey");
+        response.setHeader("Access-Control-Allow-Origin", '*');
+        response.setHeader("Content-Type", "application/json")
         response.write("test");
         response.end();
     }else{ // Otherwise send a generic response back saying that the API doesn't exist
