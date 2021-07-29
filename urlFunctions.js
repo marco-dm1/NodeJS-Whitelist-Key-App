@@ -8,18 +8,18 @@ function parseValues(queries){
     return valueDictionary; // Return the end result
 }
 
-// Parses a url for queries
+// Parses a URL for queries
 function parseQueries(url){
     let queries = [];
     let lastQueryPosition = -1;
-    for(let i = 0; i < url.length; i++){
-        if(url[i] == '?' || url[i] == '&'){
-            if(lastQueryPosition != -1){
-                queries.push(url.substring(lastQueryPosition + 1, i));
+    for(let i = 0; i < url.length; i++){ // Iterate over every character in the URL
+        if(url[i] == '?' || url[i] == '&'){ // Find the key characters that specify queries in a URL
+            if(lastQueryPosition != -1){ // Make sure we have previously found one before making a query
+                queries.push(url.substring(lastQueryPosition + 1, i)); // Save the query from last found + 1 to the current iteration
             }
-            lastQueryPosition = i;
+            lastQueryPosition = i; // Mark that we have found a query character
         }else if(i + 1 == url.length){
-            if(lastQueryPosition != -1){
+            if(lastQueryPosition != -1){ // Make query if one was previously found and its the last iteration
                 queries.push(url.substring(lastQueryPosition + 1));
             }
         }
