@@ -1,7 +1,17 @@
+const { spawn } = require("child_process");
+const { NONAME } = require("dns");
 const http = require("http"); // Require the http module so we can use it in our app
 const url = require("./urlFunctions.js");
 
 url.parse("?first=hello&second=test")
+
+var sampleKeys = {
+    "1a": "None",
+    "2a": "None",
+    "1b": "None",
+    "2b": "None"
+}
+//console.log(sampleKeys.indexOf("1b"));
 
 const server = http.createServer(function(request, response){
     if(request.url.split('?')[0] == "/SetKey"){ // Determine if the request is on our API url
@@ -12,6 +22,13 @@ const server = http.createServer(function(request, response){
         if("account" in queryObject && "key" in queryObject){
             console.log("Request received with account name: ", queryObject.account, " and the key being ", queryObject.key);
             response.setHeader("Content-Type","application/json");
+            //let keyCheck = sampleKeys.indexOf(queryObject.key);
+            
+            if(queryObject.key in sampleKeys){
+                console.log("key is valid!");
+                sampleKeys[queryObject.key] = queryObject.account;
+                console.log(sampleKeys);
+            }
             response.write(JSON.stringify(queryObject));
         }else{
             response.setHeader("Content-Type", "text/html");
