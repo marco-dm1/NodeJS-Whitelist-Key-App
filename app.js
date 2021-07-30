@@ -1,5 +1,3 @@
-const { spawn } = require("child_process");
-const { NONAME } = require("dns");
 const http = require("http"); // Require the http module so we can use it in our app
 const url = require("./urlFunctions.js");
 
@@ -13,6 +11,16 @@ var sampleKeys = {
 }
 //console.log(sampleKeys.indexOf("1b"));
 
+const MongoClient = require("mongodb").MongoClient;
+const db = require("./dbFunctions.js");
+var newDatabase;
+
+MongoClient.connect("mongodb://localhost:27017/DemoData", function(err, database){
+    if(err){console.log("An error occured when connecting to the MongoDB server."); throw err}
+    console.log("Connected");
+    newDatabase = database.db("myNewDB");
+})
+
 const server = http.createServer(function(request, response){
     if(request.url.split('?')[0] == "/SetKey"){ // Determine if the request is on our API url
         const queryObject = url.parse(request.url);
@@ -24,13 +32,21 @@ const server = http.createServer(function(request, response){
             response.setHeader("Content-Type","application/json");
             //let keyCheck = sampleKeys.indexOf(queryObject.key);
             
+            if(newDatabase != null){
+                db.findWhitelist(newDatabase, queryObject.key, queryObject.account);
+            }
+            response.write("test");
+            /*
             if(queryObject.key in sampleKeys){
                 console.log("key is valid!");
                 sampleKeys[queryObject.key] = queryObject.account;
                 console.log(sampleKeys);
             }
             response.write(JSON.stringify(queryObject));
+            */
         }else{
+            console.log("closing newdatabase");
+            newDatabase.close();
             response.setHeader("Content-Type", "text/html");
             response.write("A request was received with invalid querie(s) attached.");
         }

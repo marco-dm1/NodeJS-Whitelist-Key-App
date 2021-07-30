@@ -1,7 +1,10 @@
-var MongoClient = require("mongodb").MongoClient;
-var url = "mongodb://localhost:27017/DemoData";
+function findWhitelist(database, keyToSearch, accountToSet){
+    database.collection("whitelists").updateOne({key: keyToSearch} ,{$set: {account: accountToSet}} ,function(err, res){
+        if (err){throw err};
+        console.log(JSON.stringify(res));
+        console.log(res["modifiedCount"]);
+        //console.log("Key: " + res.key + "Name: " + res.account);
+    })
+}
 
-MongoClient.connect(url, function(err, db){
-    console.log("Connected");
-    db.close();
-})
+module.exports.findWhitelist = findWhitelist;
