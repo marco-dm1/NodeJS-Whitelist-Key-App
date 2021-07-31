@@ -1,5 +1,3 @@
-const { get } = require("http");
-
 function updateWhitelist(database, keyToSearch, accountToSet){
     database.collection("whitelists").updateOne({key: keyToSearch} ,{$set: {account: accountToSet}} ,function(err, res){
         if (err){throw err};
