@@ -1,4 +1,4 @@
-function findWhitelist(database, keyToSearch, accountToSet){
+function updateWhitelist(database, keyToSearch, accountToSet){
     database.collection("whitelists").updateOne({key: keyToSearch} ,{$set: {account: accountToSet}} ,function(err, res){
         if (err){throw err};
         console.log(JSON.stringify(res));
@@ -7,4 +7,4 @@ function findWhitelist(database, keyToSearch, accountToSet){
     })
 }
 
-module.exports.findWhitelist = findWhitelist;
+module.exports.updateWhitelist = updateWhitelist;

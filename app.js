@@ -33,7 +33,7 @@ const server = http.createServer(function(request, response){
             //let keyCheck = sampleKeys.indexOf(queryObject.key);
             
             if(newDatabase != null){
-                db.findWhitelist(newDatabase, queryObject.key, queryObject.account);
+                db.updateWhitelist(newDatabase, String(queryObject.key), String(queryObject.account)); // Update database and make sure the inputs are sanitized.
             }
             response.write("test");
             /*
@@ -46,7 +46,7 @@ const server = http.createServer(function(request, response){
             */
         }else{
             console.log("closing newdatabase");
-            newDatabase.close();
+            newDatabase.close(); // Will be fixed, referencing wrong database variable
             response.setHeader("Content-Type", "text/html");
             response.write("A request was received with invalid querie(s) attached.");
         }
