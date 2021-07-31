@@ -5,15 +5,14 @@
     </head>
     <body style="text-align: center;">
         <form>
+            <label for="whitelistKey">Whitelist Key:</label>
+            <input id="whitelistKey" type="number" name="whitelistKey"></input>
             <label for="accountName">Account Name:</label>
             <input id="accountName" name="accountName"></input>
-            <label for="whitelistKey">Whitelist Key:</label>
-            <input id="whitelistKey" name="whitelistKey"></input>
             <button type="button" onclick="formSubmit()">Set Whitelist Key to Account Name</button>
         </form>
 
         <div id="available" style="display: grid; align-items: center; width: 50%; margin-left: 25%;">
-            <h3>Current Whitelist keys:</h3>
             <table id="whitelistTable" style="background-color: #c4c4c4;">
                 <tr>
                     <th>Whitelist Key</th>
