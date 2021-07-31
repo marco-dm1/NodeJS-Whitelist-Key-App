@@ -1,9 +1,8 @@
 function updateWhitelist(database, keyToSearch, accountToSet){
     database.collection("whitelists").updateOne({key: keyToSearch} ,{$set: {account: accountToSet}} ,function(err, res){
+        // Update specified key documents with a new account field then return the number modified to the caller
         if (err){throw err};
-        console.log(JSON.stringify(res));
-        console.log(res["modifiedCount"]);
-        //console.log("Key: " + res.key + "Name: " + res.account);
+        return res["modifiedCount"];
     })
 }
 
@@ -15,5 +14,6 @@ function getWhitelists(database){
     });
 }
 
+// Export the functions for use in other scripts
 module.exports.updateWhitelist = updateWhitelist;
 module.exports.getWhitelists = getWhitelists;
