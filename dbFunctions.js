@@ -8,8 +8,9 @@ function updateWhitelist(database, keyToSearch, accountToSet){
 
 
 function getWhitelists(database){
-    database.collection("whitelists").find({}, {projection:{ _id: 0 }}).toArray().then(function(data){
+    return database.collection("whitelists").find({}, {projection:{ _id: 0 }}).toArray().then(function(data){
         // Get all documents in collection, omit all ids, convert to array, and then return to the caller
+        console.log("data: " + JSON.stringify(data));
         return data;
     });
 }
