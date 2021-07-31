@@ -33,7 +33,8 @@ const server = http.createServer(function(request, response){
             //let keyCheck = sampleKeys.indexOf(queryObject.key);
             
             if(newDatabase != null){
-                db.updateWhitelist(newDatabase, String(queryObject.key), String(queryObject.account)); // Update database and make sure the inputs are sanitized.
+                db.getWhitelists(newDatabase);
+                //db.updateWhitelist(newDatabase, String(queryObject.key), String(queryObject.account)); // Update database and make sure the inputs are sanitized.
             }
             response.write("test");
             /*
