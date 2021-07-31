@@ -12,13 +12,24 @@
             <button type="button" onclick="formSubmit()">Set Whitelist Key to Account Name</button>
         </form>
 
-        <div id="available">
-            <h3>Available Whitelist keys:</h3>
-        </div>
-        <div id="set">
-            <h3>Already set whitelist keys:</h3>
+        <div id="available" style="display: grid; align-items: center; width: 50%; margin-left: 25%;">
+            <h3>Current Whitelist keys:</h3>
+            <table style="background-color: #c4c4c4;">
+                <tr>
+                    <th>Whitelist Key</th>
+                    <th>Whitelist Owner</th>
+                </tr>
+                <!--
+                    Whitelist format:
 
+                    <tr style="background-color: #e0e0e0;">
+                        <td>KEY_PLACEHOLDER</td>
+                        <td>ACCOUNT_PLACEHOLDER</td>
+                    </tr>
+                -->
+            </table>
         </div>
+        <i>Created by <a href="https://github.com/marco-dm1">marco-dm1</a> - 2021</i>
         <script src="index.js"></script>
     </body>
 </html>
