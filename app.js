@@ -19,23 +19,28 @@ const server = http.createServer(function(request, response){
         if("account" in queryObject && "key" in queryObject){
             console.log("Request received with account name: ", queryObject.account, " and the key being ", queryObject.key);
             if(newDatabase != null){
-                let getWhitelistsPromise = new Promise(async function(resolve, reject){
+                // Convert to strings for sanity checks
+                let keyToSearch = String(queryObject.key)
+                let newAccountName = String(queryObject.account)
+                db.updateWhitelist(newDatabase, keyToSearch, newAccountName); // Send request to database to update the document with the specific key
+
+                let getWhitelistsPromise = new Promise(async function(getWhitelistResolve, getWhitelistReject){
                     let whitelistsData = await db.getWhitelists(newDatabase);
                     if(whitelistsData != null){
                         console.log("resolved");
-                        resolve(whitelistsData);
+                        getWhitelistResolve(whitelistsData);
                     }else{
                         console.log("rejected");
-                        reject();
+                        getWhitelistReject();
                     }
                 })
                 
-                getWhitelistsPromise.then(function(data){
+                getWhitelistsPromise.then(function(newGetWhitelistData){
                     response.setHeader("Content-Type","application/json");
-                    response.write(JSON.stringify(data));
+                    response.write(JSON.stringify(newGetWhitelistData));
                     response.end();
                 }).catch(function(err){
-                    console.log("an error occured and was caught", err);
+                    console.log("an error occured and was caught -getwhitelist", err);
                     response.write("The server was unable to get the current whitelists.");
                     response.end();
                 })
