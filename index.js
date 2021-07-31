@@ -12,17 +12,19 @@ function createAnchorElement(parent, text){
     parent.appendChild(newElement); // Put our new element into the intended parent element
 }
 
+async function apiRequest(account, key){
+    let requestURL = `http://localhost:3000/SetKey?account=${account}&key=${key}`;
+    let request = await fetch(requestURL);
+    let requestJSON = await request.json();
+    return requestJSON
+}
+
 function formSubmit(){
-    if(accountName.value != "" & whitelistKey.value != ""){ // Don't bother wasting requests when there is no input
-        //let request = fetch(`https://jsonplaceholder.typicode.com/todos/1?account=${accountName.value}&key=${whitelistKey.value}`)
-        let request = fetch(
-            `http://localhost:3000/SetKey?account=${accountName.value}&key=${whitelistKey.value}`)
-        request.then(function(response){
-            console.log("response:");
-            console.log(response);
-        })
-        request.catch(function(error){
-            console.log("An error occured while sending the HTTP request: ", error);
+    if(accountName.value != "" & whitelistKey.value != ""){ // Don't bother wasting requests when there is no input        
+        apiRequest(accountName.value, whitelistKey.value).then(function(result){
+            console.log(result);
+        }).catch(function(err){
+            console.log("An error occured when trying to fetch the results from the server's API.");
         })
     }
 }

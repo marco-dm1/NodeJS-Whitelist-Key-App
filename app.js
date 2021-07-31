@@ -37,7 +37,7 @@ const server = http.createServer(function(request, response){
                 
                 getWhitelistsPromise.then(function(newGetWhitelistData){
                     response.setHeader("Content-Type","application/json");
-                    response.write(JSON.stringify(newGetWhitelistData));
+                    response.write(String(JSON.stringify(newGetWhitelistData)));
                     response.end();
                 }).catch(function(err){
                     console.log("an error occured and was caught -getwhitelist", err);
